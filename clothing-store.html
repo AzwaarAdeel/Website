@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MAISON — Clothing Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --ink: #1a1714;
+      --stone: #8c8278;
+      --sand: #d4c9b8;
+      --gold: #b89a6a;
+      --rust: #a0522d;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex; gap: 2.4rem; list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-icons { display: flex; gap: 1.2rem; align-items: center; }
+
+    .nav-icons button {
+      background: none; border: none; cursor: pointer;
+      color: var(--stone); transition: color 0.25s;
+    }
+
+    .nav-icons button:hover { color: var(--ink); }
+
+    .cart-badge {
+      background: var(--ink); color: var(--cream);
+      font-size: 0.6rem; border-radius: 50%;
+      width: 16px; height: 16px;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-left: -6px; margin-top: -10px;
+      font-family: 'Jost', sans-serif;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 3rem 6rem 5rem;
+    }
+
+    .hero-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-title em { font-style: italic; color: var(--gold); }
+
+    .hero-desc {
+      font-size: 0.9rem;
+      color: var(--stone);
+      line-height: 1.8;
+      max-width: 340px;
+      margin-bottom: 2.6rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1.2rem; flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .btn-primary {
+      background: var(--ink); color: var(--cream);
+      border: none; cursor: pointer;
+      padding: 0.9rem 2.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent; color: var(--ink);
+      border: 1px solid var(--sand);
+      cursor: pointer;
+      padding: 0.9rem 2.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s 0.2s ease both;
+    }
+
+    .hero-img-wrap {
+      width: 100%; height: 100%;
+      background: var(--sand);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Artistic clothing silhouette using CSS */
+    .silhouette {
+      width: 260px;
+      height: 420px;
+      position: relative;
+    }
+
+    .figure-top {
+      width: 180px;
+      height: 220px;
+      background: var(--ink);
+      margin: 0 auto;
+      border-radius: 0 0 40px 40px;
+      position: relative;
+    }
+
+    .figure-top::before {
+      content: '';
+      position: absolute;
+      top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 80px;
+      background: #d4b896;
+      border-radius: 50%;
+    }
+
+    .figure-top::after {
+      content: '';
+      position: absolute;
+      top: 60px; left: -55px;
+      width: 55px; height: 150px;
+      background: var(--ink);
+      border-radius: 30px 0 0 30px;
+      box-shadow: 290px 0 0 0 var(--ink);
+    }
+
+    .figure-bottom {
+      width: 160px;
+      height: 200px;
+      background: var(--stone);
+      margin: 0 auto;
+      position: relative;
+      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+    }
+
+    .hero-accent {
+      position: absolute;
+      bottom: 10%; right: 8%;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      font-weight: 300;
+      color: rgba(26,23,20,0.06);
+      letter-spacing: -0.05em;
+      pointer-events: none;
+    }
+
+    .hero-stat {
+      position: absolute;
+      bottom: 2rem; left: 2rem;
+      display: flex; gap: 2rem;
+    }
+
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--cream);
+    }
+    .stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.7);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--ink);
+      padding: 1rem 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      animation: marquee 22s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-track span {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sand);
+      padding: 0 2.5rem;
+    }
+
+    .marquee-track span.dot { color: var(--gold); padding: 0; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+    }
+
+    .section-title em { font-style: italic; }
+
+    .view-all {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-decoration: none;
+      border-bottom: 1px solid var(--sand);
+      padding-bottom: 2px;
+      transition: color 0.25s, border-color 0.25s;
+      white-space: nowrap;
+    }
+
+    .view-all:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ── PRODUCTS ── */
+    section { padding: 6rem 5rem; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .product-card {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .product-card:nth-child(2) { margin-top: 3rem; }
+    .product-card:nth-child(4) { margin-top: -2rem; }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--sand);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img { transform: scale(1.02); }
+
+    /* CSS product illustrations */
+    .product-img .garment {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .coat-shape {
+      width: 120px; height: 180px;
+      background: var(--ink);
+      border-radius: 4px 4px 0 0;
+      position: relative;
+    }
+
+    .coat-shape::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      border-left: 30px solid transparent;
+      border-right: 30px solid transparent;
+      border-top: 50px solid var(--sand);
+    }
+
+    .dress-shape {
+      width: 100px; height: 170px;
+      background: #8c8278;
+      clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+    }
+
+    .shirt-shape {
+      width: 130px; height: 140px;
+      background: var(--cream);
+      border: 2px solid var(--sand);
+      position: relative;
+      border-radius: 4px;
+    }
+
+    .shirt-shape::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -25px;
+      width: 30px; height: 80px;
+      background: var(--cream);
+      border: 2px solid var(--sand);
+      border-radius: 20px 0 0 20px;
+      box-shadow: 150px 0 0 0 var(--cream), 152px 0 0 2px var(--sand);
+    }
+
+    .trouser-shape {
+      width: 100px; height: 170px;
+      background: #4a3f35;
+      position: relative;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .trouser-shape::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      width: 4px; height: 90px;
+      background: var(--sand);
+      opacity: 0.3;
+    }
+
+    .product-quick {
+      position: absolute;
+      inset: 0;
+      background: rgba(26,23,20,0.55);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .product-card:hover .product-quick { opacity: 1; }
+
+    .product-quick button {
+      background: var(--cream); color: var(--ink);
+      border: none; cursor: pointer;
+      padding: 0.75rem 1.8rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.25s;
+    }
+
+    .product-quick button:hover { background: var(--gold); color: var(--cream); }
+
+    .product-tag {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: var(--gold); color: var(--cream);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: none; border: none;
+      cursor: pointer; font-size: 1.1rem;
+      color: var(--cream);
+      transition: transform 0.2s;
+    }
+
+    .wishlist-btn:hover { transform: scale(1.2); }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.35rem;
+    }
+
+    .product-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--stone);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .product-price {
+      font-size: 0.9rem;
+      color: var(--ink);
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+
+    .product-price .old {
+      text-decoration: line-through;
+      color: var(--stone);
+      font-size: 0.8rem;
+    }
+
+    /* ── FEATURED BANNER ── */
+    .banner {
+      background: var(--ink);
+      padding: 6rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .banner-left {
+      color: var(--cream);
+    }
+
+    .banner-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .banner-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .banner-title em { font-style: italic; color: var(--gold); }
+
+    .banner-desc {
+      color: var(--stone);
+      font-size: 0.88rem;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+      max-width: 380px;
+    }
+
+    .banner-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .banner-swatch {
+      aspect-ratio: 1;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swatch-1 { background: linear-gradient(135deg, #d4c9b8, #b89a6a); }
+    .swatch-2 { background: linear-gradient(135deg, #4a3f35, #1a1714); }
+    .swatch-3 { background: linear-gradient(135deg, #a0522d, #8c3a1a); }
+    .swatch-4 { background: linear-gradient(135deg, #8c8278, #5c5248); }
+
+    .swatch-label {
+      position: absolute;
+      bottom: 0.8rem; left: 0.8rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    /* ── CATEGORIES ── */
+    .categories {
+      background: var(--cream);
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.5rem;
+    }
+
+    .cat-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .cat-item:first-child { grid-row: 1 / 3; }
+
+    .cat-bg {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.5s ease;
+    }
+
+    .cat-item:hover .cat-bg { transform: scale(1.04); }
+
+    .cat-bg-1 { background: linear-gradient(160deg, #4a3f35 0%, #1a1714 100%); min-height: 460px; }
+    .cat-bg-2 { background: linear-gradient(160deg, #d4c9b8 0%, #b89a6a 100%); }
+    .cat-bg-3 { background: linear-gradient(160deg, #8c8278 0%, #5c5248 100%); }
+    .cat-bg-4 { background: linear-gradient(160deg, #a0522d 0%, #6b3520 100%); }
+    .cat-bg-5 { background: linear-gradient(160deg, #d4c9b8 0%, #c4b5a0 100%); }
+
+    .cat-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.8rem;
+      background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 100%);
+    }
+
+    .cat-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+
+    .cat-count {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.7);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: var(--sand);
+      padding: 6rem 5rem;
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .testi-card {
+      background: var(--cream);
+      padding: 2.5rem;
+    }
+
+    .testi-stars { color: var(--gold); margin-bottom: 1.2rem; font-size: 0.9rem; }
+
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .testi-author {
+      display: flex; align-items: center; gap: 1rem;
+    }
+
+    .testi-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--sand);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--stone);
+    }
+
+    .testi-name { font-size: 0.8rem; font-weight: 400; }
+    .testi-role { font-size: 0.67rem; color: var(--stone); letter-spacing: 0.1em; margin-top: 1px; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: var(--cream);
+      padding: 5rem;
+      text-align: center;
+      border-top: 1px solid var(--sand);
+    }
+
+    .newsletter-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+    }
+
+    .newsletter-sub {
+      font-size: 0.85rem;
+      color: var(--stone);
+      margin-bottom: 2.4rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.9rem 1.4rem;
+      border: 1px solid var(--sand);
+      border-right: none;
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .newsletter-form input::placeholder { color: var(--stone); }
+    .newsletter-form input:focus { border-color: var(--ink); }
+
+    .newsletter-form button {
+      background: var(--ink); color: var(--cream);
+      border: 1px solid var(--ink);
+      padding: 0.9rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .newsletter-form button:hover { background: var(--gold); border-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 4rem 5rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .nav-logo { color: var(--cream); display: block; margin-bottom: 1rem; }
+
+    .footer-tagline {
+      font-size: 0.82rem;
+      color: var(--stone);
+      line-height: 1.8;
+      max-width: 240px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-col a {
+      font-size: 0.82rem;
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .footer-col a:hover { color: var(--cream); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--stone);
+    }
+
+    .social-links { display: flex; gap: 1.2rem; }
+
+    .social-links a {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--stone);
+      text-decoration: none;
+      font-size: 0.75rem;
+      transition: border-color 0.25s, color 0.25s;
+    }
+
+    .social-links a:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── CART DRAWER ── */
+    .cart-overlay {
+      position: fixed; inset: 0;
+      background: rgba(26,23,20,0.5);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 400px;
+      background: var(--cream);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      display: flex; flex-direction: column;
+    }
+
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-head {
+      padding: 2rem;
+      border-bottom: 1px solid var(--sand);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .cart-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400;
+    }
+
+    .close-btn {
+      background: none; border: none; cursor: pointer;
+      font-size: 1.3rem; color: var(--stone);
+      transition: color 0.2s;
+    }
+
+    .close-btn:hover { color: var(--ink); }
+
+    .cart-body {
+      flex: 1; overflow-y: auto;
+      padding: 1.5rem 2rem;
+    }
+
+    .cart-item {
+      display: flex; gap: 1rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .cart-item-img {
+      width: 72px; height: 90px;
+      background: var(--sand);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; margin-bottom: 0.25rem; }
+    .cart-item-sub { font-size: 0.7rem; color: var(--stone); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; }
+
+    .cart-qty {
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+
+    .qty-btn {
+      width: 26px; height: 26px;
+      background: none; border: 1px solid var(--sand);
+      cursor: pointer; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s;
+    }
+
+    .qty-btn:hover { border-color: var(--ink); }
+    .qty-num { font-size: 0.82rem; min-width: 20px; text-align: center; }
+
+    .cart-item-price { font-size: 0.9rem; align-self: center; }
+
+    .cart-foot {
+      padding: 1.5rem 2rem 2rem;
+      border-top: 1px solid var(--sand);
+    }
+
+    .cart-total {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .cart-total span:first-child {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone);
+    }
+
+    .cart-total span:last-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 300;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: var(--ink); color: var(--cream);
+      border: none; cursor: pointer;
+      padding: 1.1rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+
+    .checkout-btn:hover { background: var(--gold); }
+
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--stone);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--ink); color: var(--cream);
+      padding: 0.9rem 2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      z-index: 300;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      pointer-events: none;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 1.2rem 2rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 4rem 2rem 3rem; }
+      .hero-right { height: 360px; }
+      section { padding: 4rem 2rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .banner { grid-template-columns: 1fr; padding: 4rem 2rem; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .cat-item:first-child { grid-column: 1 / -1; grid-row: auto; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .newsletter { padding: 4rem 2rem; }
+      footer { padding: 3rem 2rem 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .products-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .product-card:nth-child(2), .product-card:nth-child(4) { margin-top: 0; }
+      .hero-title { font-size: 2.8rem; }
+      section { padding: 3rem 1.2rem; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .cat-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .cart-drawer { width: 100%; }
+      .banner-right { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">MAISON</a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#">Lookbook</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="nav-icons">
+    <button title="Search">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+    </button>
+    <button title="Account">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+    </button>
+    <button id="cartBtn" title="Cart">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span class="cart-badge" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <p class="hero-tag">New Arrival — Spring / Summer 2026</p>
+    <h1 class="hero-title">Where Form<br>Meets <em>Feeling</em></h1>
+    <p class="hero-desc">Thoughtfully crafted pieces that move with you — refined silhouettes for the modern wardrobe. Slow fashion, lasting quality.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">Shop Collection</button>
+      <button class="btn-outline">Explore Lookbook</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <div class="silhouette">
+        <div class="figure-top"></div>
+        <div class="figure-bottom"></div>
+      </div>
+      <div class="hero-accent">SS</div>
+      <div class="hero-stat">
+        <div class="stat-item"><div class="stat-num">120+</div><div class="stat-label">Pieces</div></div>
+        <div class="stat-item"><div class="stat-num">18</div><div class="stat-label">Countries</div></div>
+        <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Ethical</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Free shipping on orders over $150</span><span class="dot">·</span>
+    <span>Sustainable materials</span><span class="dot">·</span>
+    <span>Handcrafted in Europe</span><span class="dot">·</span>
+    <span>30-day returns</span><span class="dot">·</span>
+    <span>New arrivals every season</span><span class="dot">·</span>
+    <span>Free shipping on orders over $150</span><span class="dot">·</span>
+    <span>Sustainable materials</span><span class="dot">·</span>
+    <span>Handcrafted in Europe</span><span class="dot">·</span>
+    <span>30-day returns</span><span class="dot">·</span>
+    <span>New arrivals every season</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="collection">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Featured Pieces</p>
+      <h2 class="section-title">New <em>Collection</em></h2>
+    </div>
+    <a href="#" class="view-all">View All →</a>
+  </div>
+
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="garment"><div class="coat-shape"></div></div>
+        <div class="product-tag">New</div>
+        <button class="wishlist-btn">♡</button>
+        <div class="product-quick"><button onclick="addToCart('Oversized Wool Coat', 385)">Add to Bag</button></div>
+      </div>
+      <p class="product-sub">Outerwear</p>
+      <p class="product-name">Oversized Wool Coat</p>
+      <p class="product-price">$385</p>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="garment"><div class="dress-shape"></div></div>
+        <div class="product-tag">Sale</div>
+        <button class="wishlist-btn">♡</button>
+        <div class="product-quick"><button onclick="addToCart('Slip Midi Dress', 198)">Add to Bag</button></div>
+      </div>
+      <p class="product-sub">Dresses</p>
+      <p class="product-name">Slip Midi Dress</p>
+      <p class="product-price"><span class="old">$260</span> $198</p>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="garment"><div class="shirt-shape"></div></div>
+        <button class="wishlist-btn">♡</button>
+        <div class="product-quick"><button onclick="addToCart('Linen Atelier Shirt', 145)">Add to Bag</button></div>
+      </div>
+      <p class="product-sub">Tops</p>
+      <p class="product-name">Linen Atelier Shirt</p>
+      <p class="product-price">$145</p>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="garment"><div class="trouser-shape"></div></div>
+        <div class="product-tag">Best Seller</div>
+        <button class="wishlist-btn">♡</button>
+        <div class="product-quick"><button onclick="addToCart('Tailored Wide Trouser', 225)">Add to Bag</button></div>
+      </div>
+      <p class="product-sub">Bottoms</p>
+      <p class="product-name">Tailored Wide Trouser</p>
+      <p class="product-price">$225</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-left">
+    <p class="banner-label">The Atelier Edit</p>
+    <h2 class="banner-title">Colours of the <em>Season</em></h2>
+    <p class="banner-desc">This season we explore earthy warmth — sand, rust, umber, and stone. A palette inspired by the landscapes of the Mediterranean coast.</p>
+    <button class="btn-primary" style="background:var(--gold);border-color:var(--gold)">Shop the Palette</button>
+  </div>
+  <div class="banner-right">
+    <div class="banner-swatch swatch-1"><span class="swatch-label">Sand</span></div>
+    <div class="banner-swatch swatch-2"><span class="swatch-label">Ink</span></div>
+    <div class="banner-swatch swatch-3"><span class="swatch-label">Rust</span></div>
+    <div class="banner-swatch swatch-4"><span class="swatch-label">Stone</span></div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Shop by Category</p>
+      <h2 class="section-title">Find Your <em>Style</em></h2>
+    </div>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-item">
+      <div class="cat-bg cat-bg-1"></div>
+      <div class="cat-info">
+        <p class="cat-name">Outerwear</p>
+        <p class="cat-count">24 pieces</p>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-bg cat-bg-2"></div>
+      <div class="cat-info">
+        <p class="cat-name">Tops</p>
+        <p class="cat-count">38 pieces</p>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-bg cat-bg-3"></div>
+      <div class="cat-info">
+        <p class="cat-name">Bottoms</p>
+        <p class="cat-count">31 pieces</p>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-bg cat-bg-4"></div>
+      <div class="cat-info">
+        <p class="cat-name">Dresses</p>
+        <p class="cat-count">19 pieces</p>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-bg cat-bg-5"></div>
+      <div class="cat-info" style="background:linear-gradient(0deg,rgba(0,0,0,0.35) 0%,transparent 100%)">
+        <p class="cat-name">Accessories</p>
+        <p class="cat-count">47 pieces</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials">
+  <div class="section-header" style="margin-bottom:3rem">
+    <div>
+      <p class="section-label">Client Stories</p>
+      <h2 class="section-title">What They <em>Say</em></h2>
+    </div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The quality is unlike anything I've found on the high street. Every piece feels considered, intentional. I wear MAISON daily now."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">S</div>
+        <div><p class="testi-name">Sophia L.</p><p class="testi-role">Architect, London</p></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Finally a brand that understands slow fashion. The linen shirt I bought two years ago still looks perfect — it only gets better with age."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">M</div>
+        <div><p class="testi-name">Mireille D.</p><p class="testi-role">Designer, Paris</p></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The tailored trousers fit perfectly without alterations. Customer service was warm and responsive. I'll be a customer for life."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div><p class="testi-name">Amara O.</p><p class="testi-role">Consultant, Lagos</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <p class="newsletter-label">Join the Circle</p>
+  <h2 class="newsletter-title">Be the First to Know</h2>
+  <p class="newsletter-sub">New arrivals, private sales, and stories from the atelier — delivered quietly to your inbox.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Your email address" id="emailInput"/>
+    <button onclick="subscribe()">Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">MAISON</span>
+      <p class="footer-tagline">Slow fashion for modern life. Ethically made, thoughtfully designed, built to last.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Outerwear</a></li>
+        <li><a href="#">Tops</a></li>
+        <li><a href="#">Bottoms</a></li>
+        <li><a href="#">Dresses</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Lookbook</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Sizing Guide</a></li>
+        <li><a href="#">Shipping & Returns</a></li>
+        <li><a href="#">Care Instructions</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 MAISON. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" title="Instagram">IG</a>
+      <a href="#" title="Pinterest">PI</a>
+      <a href="#" title="Twitter">X</a>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h2>Your Bag</h2>
+    <button class="close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <p class="cart-empty">Your bag is empty.<br>Add something beautiful.</p>
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">$0</span>
+    </div>
+    <button class="checkout-btn">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  let cart = [];
+
+  function addToCart(name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+      existing.qty++;
+    } else {
+      const icons = ['🧥','👗','👔','👖'];
+      cart.push({ name, price, qty: 1, icon: icons[Math.floor(Math.random()*icons.length)] });
+    }
+    updateCart();
+    showToast(`"${name}" added to bag`);
+  }
+
+  function updateCart() {
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartCount').textContent = count;
+
+    const body = document.getElementById('cartBody');
+    const foot = document.getElementById('cartFoot');
+
+    if (cart.length === 0) {
+      body.innerHTML = '<p class="cart-empty">Your bag is empty.<br>Add something beautiful.</p>';
+      foot.style.display = 'none';
+      return;
+    }
+
+    foot.style.display = 'block';
+
+    body.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        <div class="cart-item-img">${item.icon}</div>
+        <div class="cart-item-info">
+          <p class="cart-item-name">${item.name}</p>
+          <p class="cart-item-sub">One Size</p>
+          <div class="cart-qty">
+            <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+          </div>
+        </div>
+        <p class="cart-item-price">$${item.price * item.qty}</p>
+      </div>
+    `).join('');
+
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cartTotal').textContent = `$${total}`;
+  }
+
+  function changeQty(idx, delta) {
+    cart[idx].qty += delta;
+    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+    updateCart();
+  }
+
+  function openCart() {
+    document.getElementById('cartOverlay').classList.add('open');
+    document.getElementById('cartDrawer').classList.add('open');
+  }
+
+  function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.getElementById('cartDrawer').classList.remove('open');
+  }
+
+  document.getElementById('cartBtn').addEventListener('click', openCart);
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  function subscribe() {
+    const val = document.getElementById('emailInput').value.trim();
+    if (!val || !val.includes('@')) {
+      showToast('Please enter a valid email.');
+      return;
+    }
+    document.getElementById('emailInput').value = '';
+    showToast('Welcome to the circle ✓');
+  }
+
+  // Wishlist toggle
+  document.querySelectorAll('.wishlist-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
+      btn.style.color = btn.textContent === '♥' ? '#b89a6a' : '';
+    });
+  });
+</script>
+</body>
+</html>
